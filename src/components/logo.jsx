@@ -1,0 +1,210 @@
+import React, { useEffect, useRef, useState } from 'react';
+
+const speed = { x: 3, y: 3 };
+const maxHits = 1;
+const colorDiff = 150;
+
+const getRandomNumber = (maxNum) => {
+    return Math.floor(Math.random() * maxNum);
+};
+
+const getRandomColor = (s, l, currColor) => {
+    // get random numbers till color diff is large enough
+    let h = getRandomNumber(360);
+    while (Math.abs(h - currColor) < colorDiff) h = getRandomNumber(360);
+
+    // return color in the right format
+    const color = `hsl(${h}deg, ${s}%, ${l}%)`;
+    console.log(color);
+    return color;
+};
+
+function useInterval(callback, delay) {
+    const savedCallback = useRef();
+
+    // Remember the latest callback.
+    useEffect(() => {
+        savedCallback.current = callback;
+    }, [callback]);
+
+    // Set up the interval.
+    useEffect(() => {
+        function tick() {
+            savedCallback.current();
+        }
+        const id = setInterval(tick, delay);
+        return () => clearInterval(id);
+    }, [delay]);
+}
+
+const Logo = (props) => {
+    const [fillColor, setFillColor] = useState(getRandomColor(100, 80));
+    const [hits, setHits] = useState(0);
+    const [pos, setPos] = useState({
+        x: 0, y: 0, xSpeed: speed.x, ySpeed: speed.y,
+    });
+    const noteref = useRef(null);
+
+    const moveElt = () => {
+        if (hits === -2) return;
+        const element = noteref.current;
+        const elementWidth = element.offsetWidth;
+        const elementHeight = element.offsetHeight;
+        const appWidth = window.innerWidth;
+        const appHeight = window.innerHeight;
+
+        console.log('x', pos.x, 'y', pos.y);
+        console.log({
+            ...pos,
+            x: pos.x + pos.xSpeed,
+            y: pos.y + pos.ySpeed,
+        });
+        setPos((p) => ({
+            ...p,
+            x: p.x + p.xSpeed,
+            y: p.y + p.ySpeed,
+        }));
+
+        if (pos.x + elementWidth >= appWidth - speed.x) {
+            setPos((p) => ({ ...p, x: appWidth - elementWidth - speed.x * 2, xSpeed: -speed.x }));
+            setFillColor(getRandomColor(100, 80));
+            setHits((h) => h + 1);
+        }
+
+        if (pos.y + elementHeight >= appHeight - speed.y) {
+            console.log('hitting');
+            setFillColor(getRandomColor(100, 80));
+
+            if (hits >= maxHits && pos.xSpeed < 0) {
+                // head towards top left of screen
+                const currPos = { x: pos.x, y: appHeight - elementHeight - speed.y * 2 };
+                const s = Math.sqrt(speed.x ** 2 + speed.y ** 2);
+                const dist = Math.sqrt(currPos.x ** 2 + currPos.y ** 2);
+                const normalPos = { x: currPos.x / dist, y: currPos.y / dist };
+                const newSpeed = { x: normalPos.x * s, y: normalPos.y * s };
+                setPos((p) => ({ ...currPos, xSpeed: -newSpeed.x, ySpeed: -newSpeed.y }));
+                setHits(-1);
+                return;
+            }
+            setPos((p) => ({ ...p, y: appHeight - elementHeight - speed.y * 2, ySpeed: -speed.y }));
+            setHits((h) => h + 1);
+        }
+
+        if (pos.x <= 0) {
+            console.log('hitting');
+            setPos((p) => ({ ...p, x: 1, xSpeed: speed.x }));
+            setFillColor(getRandomColor(100, 80));
+            setHits((h) => h + 1);
+        }
+
+        if (pos.y <= 0) {
+            console.log('hitting');
+
+            if (hits === -1) {
+                // start website
+                props.startWebsite(fillColor);
+                setHits(-2);
+                return;
+            }
+
+            setPos((p) => ({ ...p, y: 1, ySpeed: speed.y }));
+            setFillColor(getRandomColor(100, 80));
+            setHits((h) => h + 1);
+        }
+
+        // if (hits >= maxHits) {
+        //     setHits(-1);
+        //     setPos({ x: 0, y: 0, xSpeed: 0, ySpeed: 0 });
+        // }
+    };
+
+    useEffect(() => {
+        const element = noteref.current;
+        const elementWidth = element.offsetWidth;
+        const elementHeight = element.offsetHeight;
+        const appWidth = window.innerWidth;
+        const appHeight = window.innerHeight;
+
+        const randPos = { x: getRandomNumber(elementWidth, appWidth - 2 * elementWidth), y: getRandomNumber(elementWidth, appWidth - 2 * elementWidth) };
+
+        setPos({ ...randPos, xSpeed: -speed.x, ySpeed: -speed.y });
+    }, [noteref]);
+
+    const interval = useInterval(() => {
+        moveElt();
+    }, 10);
+
+    // if (hits < 0) return null;
+    return (
+        <div className="logo" style={{ top: pos.y, left: pos.x, zIndex: 999, width: 280 }} ref={noteref}>
+            <svg version="1.0"
+                xmlns="http://www.w3.org/2000/svg"
+                // width="300.000000pt"
+                // height="188.000000pt"
+                viewBox="0 0 280 170.3"
+                preserveAspectRatio="xMidYMid meet"
+            >
+                <metadata>
+                    Created by potrace 1.10, written by Peter Selinger 2001-2011
+                </metadata>
+                <g transform="translate(0.000000,180.000000) scale(0.100000,-0.100000)"
+                    fill={fillColor}
+                    stroke="none"
+                >
+                    <path d="M147 1348 c3 -216 7 -395 9 -397 2 -2 97 -5 211 -5 174 -1 219 2 278
+18 136 36 225 99 273 190 36 71 43 214 13 298 -37 108 -99 176 -212 233 -89
+46 -152 55 -372 55 l-205 0 5 -392z m437 0 c34 -49 5 -118 -49 -118 -24 0 -25
+2 -25 70 l0 70 29 0 c20 0 35 -8 45 -22z"
+                    />
+                    <path d="M972 1218 l3 -273 181 -3 181 -2 7 61 c11 114 14 109 -49 109 -42 0
+-55 3 -55 15 0 9 9 15 24 15 49 0 56 8 56 71 l0 59 -40 0 c-33 0 -40 3 -40 20
+0 17 7 20 45 20 l45 0 0 90 0 90 -180 0 -180 0 2 -272z"
+                    />
+                    <path d="M1370 1483 c1 -4 29 -127 64 -273 l62 -265 117 -3 c114 -3 117 -2
+122 20 6 26 105 520 105 525 0 2 -44 3 -99 3 l-98 0 -7 -50 c-12 -86 -19 -90
+-36 -20 l-16 65 -107 3 c-59 1 -107 -1 -107 -5z"
+                    />
+                    <path d="M1962 1464 c-100 -50 -147 -140 -140 -267 4 -83 24 -130 75 -180 52
+-53 98 -71 173 -71 119 0 225 70 251 166 17 63 7 176 -21 233 -27 57 -81 112
+-126 131 -56 23 -152 18 -212 -12z m152 -230 c29 -29 11 -84 -27 -84 -30 0
+-47 18 -47 50 0 47 42 66 74 34z"
+                    />
+                    <path d="M2353 1219 c3 -149 8 -273 11 -276 3 -3 46 -2 97 2 l92 7 -6 51 c-7
+56 -3 55 33 -11 l25 -47 125 0 125 0 -4 265 c-2 146 -5 268 -8 273 -2 4 -53 7
+-113 7 l-109 0 -3 -62 -3 -63 -33 63 -32 62 -102 0 -101 0 6 -271z"
+                    />
+                    <path d="M522 921 c-111 -38 -186 -139 -187 -251 0 -49 5 -65 30 -101 17 -24
+58 -65 90 -92 33 -26 62 -52 63 -57 2 -6 -27 -10 -71 -10 l-74 0 -7 -121 c-4
+-67 -5 -123 -3 -126 3 -2 49 -9 103 -15 233 -25 390 52 425 208 11 49 10 60
+-7 102 -16 38 -30 53 -79 83 -33 20 -62 44 -64 54 -5 26 26 45 71 45 l38 0 0
+144 0 144 -31 6 c-68 13 -243 6 -297 -13z"
+                    />
+                    <path d="M1898 693 l-88 -4 0 -269 0 -270 49 0 c26 0 69 -3 95 -6 l46 -7 0 45
+c0 25 3 48 7 51 12 13 33 -16 39 -54 l7 -39 90 0 90 0 -7 40 c-3 22 -17 64
+-29 92 -23 52 -23 54 -5 84 51 86 41 213 -21 275 -37 37 -122 71 -165 67 -12
+-1 -60 -4 -108 -5z m143 -223 c24 -13 26 -65 3 -74 -37 -14 -53 -6 -60 28 -9
+53 11 70 57 46z"
+                    />
+                    <path d="M2335 691 l-90 -6 4 -265 c2 -146 4 -266 5 -266 0 -1 43 -4 94 -8
+l92 -7 0 51 c0 72 27 66 40 -10 l5 -35 90 0 90 0 -3 35 c-2 19 -15 60 -28 90
+l-24 55 25 49 c51 100 27 228 -53 280 -36 24 -111 47 -142 44 -8 -1 -55 -4
+-105 -7z m146 -221 c21 -12 25 -50 7 -68 -7 -7 -25 -12 -40 -12 -27 0 -28 2
+-28 45 0 39 3 45 21 45 11 0 29 -5 40 -10z"
+                    />
+                    <path d="M890 596 l0 -95 53 -3 52 -3 5 -175 5 -175 114 -3 114 -3 -4 178 -4
+178 53 3 52 3 0 48 c0 27 -3 69 -6 95 l-7 46 -213 0 -214 0 0 -94z"
+                    />
+                    <path d="M1346 463 c-15 -126 -29 -247 -32 -270 l-6 -43 101 0 c111 0 105 -3
+113 70 2 19 9 25 28 25 22 0 26 -6 33 -50 l8 -51 97 4 c53 2 98 5 99 6 1 1
+-90 422 -112 514 -5 22 -8 22 -154 22 l-148 0 -27 -227z m214 -65 c0 -7 3 -23
+6 -35 6 -20 3 -23 -23 -23 -27 0 -29 2 -25 35 3 26 9 35 23 35 10 0 19 -6 19
+-12z"
+                    />
+                </g>
+            </svg>
+
+        </div>
+    );
+};
+
+export default Logo;

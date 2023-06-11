@@ -32,7 +32,9 @@
         "jsx-a11y/no-noninteractive-element-interactions": 0,
         "react/jsx-one-expression-per-line":0,
         "no-unused-vars": 0,
-        "react/jsx-indent": [2,4]
+        "react/jsx-indent": [2,4],
+        "react/jsx-indent-props": [2,4],
+        "object-curly-newline": 0
     },
     "plugins": [
         "react"
