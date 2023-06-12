@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const speed = { x: 3, y: 3 };
-const maxHits = 1;
+const maxHits = 3;
 const colorDiff = 150;
 
 const getRandomNumber = (maxNum) => {
     return Math.floor(Math.random() * maxNum);
 };
+
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
 
 const getRandomColor = (s, l, currColor) => {
     // get random numbers till color diff is large enough
@@ -38,97 +42,153 @@ function useInterval(callback, delay) {
 }
 
 const Logo = (props) => {
-    const [fillColor, setFillColor] = useState(getRandomColor(100, 80));
+    const [fillColor, setFillColor] = useState(null);
     const [hits, setHits] = useState(0);
     const [pos, setPos] = useState({
         x: 0, y: 0, xSpeed: speed.x, ySpeed: speed.y,
     });
-    const noteref = useRef(null);
+    const logoref = useRef(null);
+
+    const startIfReady = () => {
+        // console.log('hits', hits);
+        if (hits === -1) {
+            // start website
+            props.startWebsite(fillColor);
+            setHits(-2);
+            return true;
+        }
+        return false;
+    };
 
     const moveElt = () => {
         if (hits === -2) return;
-        const element = noteref.current;
+        const element = logoref.current;
         const elementWidth = element.offsetWidth;
         const elementHeight = element.offsetHeight;
         const appWidth = window.innerWidth;
         const appHeight = window.innerHeight;
 
-        console.log('x', pos.x, 'y', pos.y);
-        console.log({
-            ...pos,
-            x: pos.x + pos.xSpeed,
-            y: pos.y + pos.ySpeed,
-        });
+        const sendDirection = (edge, rSpeed) => {
+            const topLeft = { x: 0, y: 0 };
+            const bottomLeft = { x: 0, y: appHeight - elementHeight };
+            const bottomRight = { x: appWidth - elementWidth, y: appHeight - elementHeight };
+            const topRight = { x: appWidth - elementWidth, y: 0 };
+            const destinations = {
+                'top': {
+                    0: bottomLeft,
+                    2: bottomRight,
+                    currPos: { x: pos.x, y: speed.y * 2 },
+                },
+                'right': {
+                    0: topLeft,
+                    2: bottomLeft,
+                    currPos: { x: appWidth - elementWidth - 2 * speed.x, y: pos.y },
+                },
+                'bottom': {
+                    0: topLeft,
+                    2: topRight,
+                    currPos: { x: pos.x, y: appHeight - elementHeight - speed.y * 2 },
+                },
+                'left': {
+                    0: topRight,
+                    2: bottomRight,
+                    currPos: { x: 2 * speed.x, y: pos.y },
+                },
+            };
+            const dest = destinations[edge][Math.sign(rSpeed) + 1];
+            console.log('destination:', dest);
+
+            const { currPos } = destinations[edge];
+            const s = Math.sqrt(speed.x ** 2 + speed.y ** 2);
+
+            const toDest = { x: dest.x - currPos.x, y: dest.y - currPos.y };
+            const dist = Math.sqrt(toDest.x ** 2 + toDest.y ** 2);
+            const normalToDest = { x: toDest.x / dist, y: toDest.y / dist };
+            const newSpeed = { x: normalToDest.x * s, y: normalToDest.y * s };
+            setPos((p) => ({ ...currPos, xSpeed: newSpeed.x, ySpeed: newSpeed.y }));
+            setHits(-1);
+        };
+
+        // console.log('x', pos.x, 'y', pos.y);
+        // console.log({
+        //     ...pos,
+        //     x: pos.x + pos.xSpeed,
+        //     y: pos.y + pos.ySpeed,
+        // });
         setPos((p) => ({
             ...p,
             x: p.x + p.xSpeed,
             y: p.y + p.ySpeed,
         }));
 
+        // right edge
         if (pos.x + elementWidth >= appWidth - speed.x) {
-            setPos((p) => ({ ...p, x: appWidth - elementWidth - speed.x * 2, xSpeed: -speed.x }));
+            if (startIfReady()) return;
+
+            if (hits >= maxHits) sendDirection('right', pos.ySpeed);
+
+            else {
+                setPos((p) => ({ ...p, x: appWidth - elementWidth - speed.x * 2, xSpeed: -speed.x }));
+                setHits((h) => h + 1);
+            }
             setFillColor(getRandomColor(100, 80));
-            setHits((h) => h + 1);
         }
 
+        // bottom edge
         if (pos.y + elementHeight >= appHeight - speed.y) {
-            console.log('hitting');
-            setFillColor(getRandomColor(100, 80));
+            if (startIfReady()) return;
 
-            if (hits >= maxHits && pos.xSpeed < 0) {
-                // head towards top left of screen
-                const currPos = { x: pos.x, y: appHeight - elementHeight - speed.y * 2 };
-                const s = Math.sqrt(speed.x ** 2 + speed.y ** 2);
-                const dist = Math.sqrt(currPos.x ** 2 + currPos.y ** 2);
-                const normalPos = { x: currPos.x / dist, y: currPos.y / dist };
-                const newSpeed = { x: normalPos.x * s, y: normalPos.y * s };
-                setPos((p) => ({ ...currPos, xSpeed: -newSpeed.x, ySpeed: -newSpeed.y }));
-                setHits(-1);
-                return;
+            // console.log('hitting');
+            if (hits >= maxHits) sendDirection('bottom', pos.xSpeed);
+            else {
+                setPos((p) => ({ ...p, y: appHeight - elementHeight - speed.y * 2, ySpeed: -speed.y }));
+                setHits((h) => h + 1);
             }
-            setPos((p) => ({ ...p, y: appHeight - elementHeight - speed.y * 2, ySpeed: -speed.y }));
-            setHits((h) => h + 1);
+            setFillColor(getRandomColor(100, 80));
         }
 
+        // left edge
         if (pos.x <= 0) {
-            console.log('hitting');
-            setPos((p) => ({ ...p, x: 1, xSpeed: speed.x }));
-            setFillColor(getRandomColor(100, 80));
-            setHits((h) => h + 1);
-        }
+            if (startIfReady()) return;
 
-        if (pos.y <= 0) {
-            console.log('hitting');
+            // console.log('hitting');
+            if (hits >= maxHits) sendDirection('left', pos.ySpeed);
 
-            if (hits === -1) {
-                // start website
-                props.startWebsite(fillColor);
-                setHits(-2);
-                return;
+            else {
+                setPos((p) => ({ ...p, x: 1, xSpeed: speed.x }));
+                setHits((h) => h + 1);
             }
-
-            setPos((p) => ({ ...p, y: 1, ySpeed: speed.y }));
             setFillColor(getRandomColor(100, 80));
-            setHits((h) => h + 1);
         }
 
-        // if (hits >= maxHits) {
-        //     setHits(-1);
-        //     setPos({ x: 0, y: 0, xSpeed: 0, ySpeed: 0 });
-        // }
+        // top edge
+        if (pos.y <= 0) {
+            if (startIfReady()) return;
+            // console.log('hitting');
+            if (hits >= maxHits) sendDirection('top', pos.xSpeed);
+
+            else {
+                setPos((p) => ({ ...p, y: 1, ySpeed: speed.y }));
+                setHits((h) => h + 1);
+            }
+            setFillColor(getRandomColor(100, 80));
+        }
     };
 
     useEffect(() => {
-        const element = noteref.current;
+        const element = logoref.current;
         const elementWidth = element.offsetWidth;
         const elementHeight = element.offsetHeight;
         const appWidth = window.innerWidth;
         const appHeight = window.innerHeight;
 
-        const randPos = { x: getRandomNumber(elementWidth, appWidth - 2 * elementWidth), y: getRandomNumber(elementWidth, appWidth - 2 * elementWidth) };
-
+        // console.log('app width', appWidth, 'app height', appHeight);
+        // console.log(`range: ${elementWidth} to ${appWidth - 2 * elementWidth}`);
+        const randPos = { x: randomInt(elementWidth, appWidth - 2 * elementWidth), y: randomInt(elementHeight, appHeight - 2 * elementHeight) };
+        // console.log('rand pos', randPos);
+        setFillColor(getRandomColor(100, 80));
         setPos({ ...randPos, xSpeed: -speed.x, ySpeed: -speed.y });
-    }, [noteref]);
+    }, [logoref]);
 
     const interval = useInterval(() => {
         moveElt();
@@ -136,18 +196,18 @@ const Logo = (props) => {
 
     // if (hits < 0) return null;
     return (
-        <div className="logo" style={{ top: pos.y, left: pos.x, zIndex: 999, width: 280 }} ref={noteref}>
+        <div className="logo" style={{ top: pos.y, left: pos.x, zIndex: 999, width: 271.3 }} ref={logoref}>
             <svg version="1.0"
                 xmlns="http://www.w3.org/2000/svg"
                 // width="300.000000pt"
                 // height="188.000000pt"
-                viewBox="0 0 280 170.3"
+                viewBox="0 0 271.3 170.3"
                 preserveAspectRatio="xMidYMid meet"
             >
                 <metadata>
                     Created by potrace 1.10, written by Peter Selinger 2001-2011
                 </metadata>
-                <g transform="translate(0.000000,180.000000) scale(0.100000,-0.100000)"
+                <g transform="translate(-11.000000,180.000000) scale(0.100000,-0.100000)"
                     fill={fillColor}
                     stroke="none"
                 >

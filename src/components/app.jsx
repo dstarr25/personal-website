@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
     BrowserRouter, Routes, Route, NavLink, useParams,
 } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Counter from './counter';
 import Controls from './controls';
 import Logo from './logo';
@@ -23,7 +24,13 @@ const App = (props) => {
             {!loading
                 && (
                     <>
-                        <div className="overlay" style={{ backgroundColor: overlayColor }} />
+                        <motion.div
+                            className="overlay"
+                            style={{ backgroundColor: overlayColor }}
+                            initial={{ opacity: 1 }}
+                            animate={{ opacity: 0 }}
+                            transition={{ duration: 1.5 }}
+                        />
                         <Site />
                     </>
 
