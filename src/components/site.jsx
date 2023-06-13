@@ -2,37 +2,79 @@ import React, { useState } from 'react';
 import {
     BrowserRouter, Routes, Route, NavLink, useParams,
 } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Counter from './counter';
 import Controls from './controls';
 
 function Site() {
+    const container = {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.5, delayChildren: 0.5 },
+        },
+    };
+    const child = {
+        visible: {
+            opacity: 1,
+            transition: {
+                type: 'spring',
+                damping: 12,
+                stiffness: 100,
+            },
+        },
+        hidden: {
+            opacity: 0,
+            transition: {
+                type: 'spring',
+                damping: 12,
+                stiffness: 100,
+            },
+        },
+    };
+
+    const letters = Array.from('...');
     return (
         <div className="site">
-            <BrowserRouter>
+            {/* <BrowserRouter>
 
-                <Nav />
+                <NavBar />
                 <Routes>
                     <Route path="/" element={<Welcome />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/test/:id" element={<Test />} />
                     <Route path="*" element={<FallBack />} />
                 </Routes>
-            </BrowserRouter>
+            </BrowserRouter> */}
+            <p>website in progress
+                <motion.span
+                    variants={container}
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ repeat: Infinity }}
+                >
+                    {letters.map((letter, index) => (
+                        <motion.span variants={child} key={letter}>
+                            {letter === ' ' ? '\u00A0' : letter}
+                        </motion.span>
+                    ))}
+                </motion.span>
+            </p>
 
+            <p style={{ fontStyle: 'italic', color: 'lightgray', fontSize: '70%' }}>check back later ;)</p>
         </div>
     );
 }
 
-const Nav = (props) => {
+const NavBar = (props) => {
     return (
-        <nav>
-            <ul>
-                <li><NavLink to="/">Home</NavLink></li>
-                <li><NavLink to="/about">About</NavLink></li>
-                <li><NavLink to="/test/id1">test id1</NavLink></li>
-                <li><NavLink to="/test/id2">test id2</NavLink></li>
-            </ul>
-        </nav>
+        <ul id="navBar">
+            <li>Logo</li>
+            <li>Home</li>
+            <li>About</li>
+            <li>test id1</li>
+            <li>test id2</li>
+        </ul>
     );
 };
 
