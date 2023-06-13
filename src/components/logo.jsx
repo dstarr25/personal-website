@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const speed = { x: 3, y: 3 };
 const maxHits = 3;
-const colorDiff = 150;
+const colorDiff = 30;
 
 const getRandomNumber = (maxNum) => {
     return Math.floor(Math.random() * maxNum);
@@ -15,11 +15,15 @@ function randomInt(min, max) {
 const getRandomColor = (s, l, currColor) => {
     // get random numbers till color diff is large enough
     let h = getRandomNumber(360);
-    while (Math.abs(h - currColor) < colorDiff) h = getRandomNumber(360);
-
+    if (currColor === undefined) return `hsl(${h}deg, ${s}%, ${l}%)`;
+    const currColorDegree = currColor.split('deg')[0].split('(')[1];
+    while (Math.abs(h - currColorDegree) < colorDiff) h = getRandomNumber(360);
+    // console.log('h', h);
+    // console.log('currColor', currColorDegree);
+    // console.log('diff', Math.abs(h - currColorDegree));
     // return color in the right format
     const color = `hsl(${h}deg, ${s}%, ${l}%)`;
-    console.log(color);
+    // console.log(color);
     return color;
 };
 
@@ -78,21 +82,25 @@ const Logo = (props) => {
                     0: bottomLeft,
                     2: bottomRight,
                     currPos: { x: pos.x, y: speed.y * 2 },
+                    normal: { x: 0, y: 1 },
                 },
                 'right': {
                     0: topLeft,
                     2: bottomLeft,
                     currPos: { x: appWidth - elementWidth - 2 * speed.x, y: pos.y },
+                    normal: { x: -1, y: 0 },
                 },
                 'bottom': {
                     0: topLeft,
                     2: topRight,
                     currPos: { x: pos.x, y: appHeight - elementHeight - speed.y * 2 },
+                    normal: { x: 0, y: -1 },
                 },
                 'left': {
                     0: topRight,
                     2: bottomRight,
                     currPos: { x: 2 * speed.x, y: pos.y },
+                    normal: { x: 1, y: 0 },
                 },
             };
             const dest = destinations[edge][Math.sign(rSpeed) + 1];
@@ -105,8 +113,18 @@ const Logo = (props) => {
             const dist = Math.sqrt(toDest.x ** 2 + toDest.y ** 2);
             const normalToDest = { x: toDest.x / dist, y: toDest.y / dist };
             const newSpeed = { x: normalToDest.x * s, y: normalToDest.y * s };
+
+            // only set the pos if the angle formed between the normal and the new speed is between 30 and 60 degrees
+            const dotProduct = destinations[edge].normal.x * newSpeed.x + destinations[edge].normal.y * newSpeed.y;
+            const normalMag = Math.sqrt(destinations[edge].normal.x ** 2 + destinations[edge].normal.y ** 2);
+            const newSpeedMag = Math.sqrt(newSpeed.x ** 2 + newSpeed.y ** 2);
+            const angle = (Math.acos(dotProduct / (normalMag * newSpeedMag)) * 180) / Math.PI;
+            console.log('angle', angle);
+            if (angle < 35 || angle > 55) return false;
+
             setPos((p) => ({ ...currPos, xSpeed: newSpeed.x, ySpeed: newSpeed.y }));
             setHits(-1);
+            return true;
         };
 
         // console.log('x', pos.x, 'y', pos.y);
@@ -124,54 +142,47 @@ const Logo = (props) => {
         // right edge
         if (pos.x + elementWidth >= appWidth - speed.x) {
             if (startIfReady()) return;
+            setFillColor(getRandomColor(100, 80, fillColor));
 
-            if (hits >= maxHits) sendDirection('right', pos.ySpeed);
+            if (hits >= maxHits && sendDirection('right', pos.ySpeed)) return;
 
-            else {
-                setPos((p) => ({ ...p, x: appWidth - elementWidth - speed.x * 2, xSpeed: -speed.x }));
-                setHits((h) => h + 1);
-            }
-            setFillColor(getRandomColor(100, 80));
+            setPos((p) => ({ ...p, x: appWidth - elementWidth - speed.x * 2, xSpeed: -speed.x }));
+            setHits((h) => h + 1);
         }
 
         // bottom edge
         if (pos.y + elementHeight >= appHeight - speed.y) {
             if (startIfReady()) return;
+            setFillColor(getRandomColor(100, 80, fillColor));
 
             // console.log('hitting');
-            if (hits >= maxHits) sendDirection('bottom', pos.xSpeed);
-            else {
-                setPos((p) => ({ ...p, y: appHeight - elementHeight - speed.y * 2, ySpeed: -speed.y }));
-                setHits((h) => h + 1);
-            }
-            setFillColor(getRandomColor(100, 80));
+            if (hits >= maxHits && sendDirection('bottom', pos.xSpeed)) return;
+            setPos((p) => ({ ...p, y: appHeight - elementHeight - speed.y * 2, ySpeed: -speed.y }));
+            setHits((h) => h + 1);
         }
 
         // left edge
         if (pos.x <= 0) {
             if (startIfReady()) return;
+            setFillColor(getRandomColor(100, 80, fillColor));
 
             // console.log('hitting');
-            if (hits >= maxHits) sendDirection('left', pos.ySpeed);
+            if (hits >= maxHits && sendDirection('left', pos.ySpeed)) return;
 
-            else {
-                setPos((p) => ({ ...p, x: 1, xSpeed: speed.x }));
-                setHits((h) => h + 1);
-            }
-            setFillColor(getRandomColor(100, 80));
+            setPos((p) => ({ ...p, x: 1, xSpeed: speed.x }));
+            setHits((h) => h + 1);
         }
 
         // top edge
         if (pos.y <= 0) {
             if (startIfReady()) return;
-            // console.log('hitting');
-            if (hits >= maxHits) sendDirection('top', pos.xSpeed);
+            setFillColor(getRandomColor(100, 80, fillColor));
 
-            else {
-                setPos((p) => ({ ...p, y: 1, ySpeed: speed.y }));
-                setHits((h) => h + 1);
-            }
-            setFillColor(getRandomColor(100, 80));
+            // console.log('hitting');
+            if (hits >= maxHits && sendDirection('top', pos.xSpeed)) return;
+
+            setPos((p) => ({ ...p, y: 1, ySpeed: speed.y }));
+            setHits((h) => h + 1);
         }
     };
 

@@ -10,6 +10,7 @@ import Site from './site';
 
 const App = (props) => {
     const [loading, setLoading] = useState(true);
+    const [fading, setFading] = useState(true);
     const [overlayColor, setOverlayColor] = useState('hsl(155deg, 100%, 80%)');
 
     const startWebsite = (color) => {
@@ -24,13 +25,17 @@ const App = (props) => {
             {!loading
                 && (
                     <>
-                        <motion.div
-                            className="overlay"
-                            style={{ backgroundColor: overlayColor }}
-                            initial={{ opacity: 1 }}
-                            animate={{ opacity: 0 }}
-                            transition={{ duration: 1.5 }}
-                        />
+                        {fading && (
+                            <motion.div
+                                className="overlay"
+                                style={{ backgroundColor: overlayColor }}
+                                initial={{ opacity: 1 }}
+                                animate={{ opacity: 0 }}
+                                transition={{ duration: 1.5 }}
+                                onAnimationComplete={() => setFading(false)}
+                            />
+                        )}
+
                         <Site />
                     </>
 
