@@ -6,17 +6,16 @@ import { motion } from 'framer-motion';
 import Counter from './counter';
 import Controls from './controls';
 
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+}
+
 function Site() {
-    const container = {
-        hidden: { opacity: 0 },
+    const child = () => ({
         visible: {
             opacity: 1,
-            transition: { staggerChildren: 0.5, delayChildren: 0.5 },
-        },
-    };
-    const child = {
-        visible: {
-            opacity: 1,
+            x: 0,
+            y: 0,
             transition: {
                 type: 'spring',
                 damping: 12,
@@ -25,15 +24,17 @@ function Site() {
         },
         hidden: {
             opacity: 0,
+            x: randomInt(-200, 200),
+            y: randomInt(-200, 200),
             transition: {
                 type: 'spring',
                 damping: 12,
                 stiffness: 100,
             },
         },
-    };
+    });
 
-    const letters = Array.from('...');
+    const greeting = 'Hello. My name is Devon.';
     return (
         <div className="site">
             {/* <BrowserRouter>
@@ -46,19 +47,19 @@ function Site() {
                     <Route path="*" element={<FallBack />} />
                 </Routes>
             </BrowserRouter> */}
-            <p>website in progress
-                <motion.span
-                    variants={container}
+            <p>
+                <motion.div
+                    style={{ display: 'flex' }}
                     initial="hidden"
                     animate="visible"
-                    transition={{ repeat: Infinity }}
+                    transition={{ staggerChildren: 0.1, delayChildren: 0.5 }}
                 >
-                    {letters.map((letter, index) => (
-                        <motion.span variants={child} key={letter}>
+                    {Array.from(greeting).map((letter, index) => (
+                        <motion.span variants={child()} key={letter}>
                             {letter === ' ' ? '\u00A0' : letter}
                         </motion.span>
                     ))}
-                </motion.span>
+                </motion.div>
             </p>
 
             <p style={{ fontStyle: 'italic', color: 'lightgray', fontSize: '70%' }}>check back later ;)</p>
