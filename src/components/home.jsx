@@ -5,7 +5,9 @@ import { IconContext } from 'react-icons';
 import Icon from './icon';
 
 function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+    const result = Math.floor(Math.random() * (max - min + 1) + min);
+    console.log(result);
+    return result;
 }
 
 function Home() {
@@ -33,9 +35,16 @@ function Home() {
     });
 
     const greeting = 'Hello. My name is Devon.';
-
+    const iconSize = '40px';
     return (
-        <div className="homePage">
+        <motion.div
+            className="homePage"
+            initial={{ top: '0vh' }}
+            // animate={{ opacity: 1 }}
+            exit={{ top: '-100vh' }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
+
+        >
             <motion.div
                 style={{ display: 'flex' }}
                 initial="hidden"
@@ -43,53 +52,24 @@ function Home() {
                 transition={{ staggerChildren: 0.1, delayChildren: 0.5 }}
             >
                 {Array.from(greeting).map((letter, index) => (
-                    <motion.span variants={child()} key={letter}>
+                    <motion.span variants={child()}>
                         {letter === ' ' ? '\u00A0' : letter}
                     </motion.span>
                 ))}
             </motion.div>
-            <motion.div style={{ display: 'flex', flexDirection: 'row', gap: '30px' }}>
-                <Icon icon={<LuGithub />} size="40px" hoverColor="#E78793" />
-                <Icon icon={<LuMail />} size="40px" hoverColor="#FFE793" />
-                <Icon icon={<LuLinkedin />} size="40px" hoverColor="#94DBFF" />
+
+            <motion.div
+                style={{ display: 'flex', flexDirection: 'row' }}
+                initial={{ opacity: 0, y: 100, gap: '100px' }}
+                animate={{ opacity: 1, y: 0, gap: '30px' }}
+                transition={{ delay: 3.5, type: 'spring', damping: 12, stiffness: 100 }}
+            >
+                <Icon icon={<LuGithub />} size={iconSize} hoverColor="#E78793" link="https://github.com/dstarr25" />
+                <Icon icon={<LuMail />} size={iconSize} hoverColor="#FFE793" link="mailto:devonstarr123@gmail.com" />
+                <Icon icon={<LuLinkedin />} size={iconSize} hoverColor="#94DBFF" link="https://www.linkedin.com/in/devon-starr/" />
             </motion.div>
-        </div>
+        </motion.div>
     );
 }
-
-const iconContextValue = {
-    color: 'white',
-    size: '40px',
-};
-
-const GithubIcon = () => (
-    <IconContext.Provider
-        value={iconContextValue}
-    >
-        <div>
-            <LuGithub />
-        </div>
-    </IconContext.Provider>
-);
-
-const MailIcon = () => (
-    <IconContext.Provider
-        value={iconContextValue}
-    >
-        <div>
-            <LuMail />
-        </div>
-    </IconContext.Provider>
-);
-
-const LinkedinIcon = () => (
-    <IconContext.Provider
-        value={{ ...iconContextValue, className: 'linkedinIcon' }}
-    >
-        <div>
-            <LuLinkedin />
-        </div>
-    </IconContext.Provider>
-);
 
 export default Home;

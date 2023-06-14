@@ -9,8 +9,8 @@ import Logo from './logo';
 import Site from './site';
 
 const App = (props) => {
-    const [loading, setLoading] = useState(false);
-    const [fading, setFading] = useState(false);
+    const [loading, setLoading] = useState(true);
+    const [fading, setFading] = useState(true);
     const [overlayColor, setOverlayColor] = useState('hsl(155deg, 100%, 80%)');
 
     const startWebsite = (color) => {

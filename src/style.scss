@@ -13,10 +13,8 @@ html {
     box-sizing: border-box;
 }
 
-.all {
-    // height: 100vh;
-    // background-color: rgb(21, 21, 21);
-    // overflow: hidden;
+body {
+    overflow: hidden;
 }
 
 #main {
@@ -34,6 +32,7 @@ html {
     width: 100%;
     height: 100vh;
     position: absolute;
+    z-index: 10;
 }
 
 .logo {
@@ -64,17 +63,46 @@ html {
     // justify-content: center;
     // align-items: center;
     font-family: 'Varela Round', sans-serif;
-    background-color: rgb(21, 21, 21);
+    background-color: rgb(240, 240, 240);
     height: 100vh;
 
-    .homePage {
+
+    .homePage, .aboutPage, .projectsPage {
         width: 100%;
         height: 100%;
+        position: absolute;
+    }
+
+
+
+    .homePage {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items:center;
         gap: 100px;
+        background-color: rgb(21, 21, 21);
+    }
+
+    .aboutPage {
+        background-color: rgb(132, 21, 21);
+    }
+
+    .projectsPage {
+        background-color: rgb(240, 240, 240);
+    }
+
+    .aboutPage, .projectsPage {
+        .titleText {
+            border: 1px solid black;
+            color: black;
+            font-size: 50px;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-around;
+            height: 300px;
+            align-items: flex-end;
+        }
     }
 
     .box {
@@ -105,21 +133,29 @@ html {
         background-color: #0e76a8;
     }
 
-    // #navBar {
-    //     display: flex;
-    //     width: 100%;
-    //     height: 100px;
-    //     background-color: rgb(252, 252, 252);
-    //     justify-content: flex-end;
-    //     align-items: center;
-    //     color: black;
-    //     list-style-type: none;
-    //     gap: 20px;
-
-    //     li {
-    //         cursor: pointer;
-    //         color: #ff5555;
-    //         font-size: 30px;
-    //     }
-    // }
+    #navBar {
+        position: fixed;
+        z-index: 999;
+        top: 30px;
+        right: 30px;
+        display: flex;
+        flex-direction: column;
+        // width: 100%;
+        height: 100%;
+        // background-color: rgba(36, 36, 36, 0.5);
+        justify-content: flex-start;
+        align-items: flex-end;
+        color: white;
+        list-style-type: none;
+        gap: 20px;
+        font-family: 'Source Code Pro', monospace;
+        font-size: 24px;
+        user-select: none;
+        // >* {
+        //     transform-origin: center right;
+        // }
+        // >*:hover {
+        //     transform: scale(1.1);
+        // }
+    }
 }

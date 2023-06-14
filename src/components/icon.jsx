@@ -3,7 +3,7 @@ import { IconContext } from 'react-icons';
 import { motion, useAnimation } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const Icon = ({ icon, size, hoverColor }) => {
+const Icon = ({ icon, size, hoverColor, link }) => {
     const controls = useAnimation();
 
     const handleHoverStart = async () => {
@@ -32,7 +32,7 @@ const Icon = ({ icon, size, hoverColor }) => {
         <IconContext.Provider
             value={{ size }}
         >
-            <Link to="https://github.com/dstarr25">
+            <Link to={link}>
                 <motion.div
                     animate={controls}
                     onMouseEnter={handleHoverStart}
