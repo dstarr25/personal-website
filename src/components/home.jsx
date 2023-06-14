@@ -45,6 +45,7 @@ function Home() {
             transition={{ duration: 1, ease: 'easeInOut' }}
 
         >
+            <div style={{ height: 50 }} />
             <motion.div
                 style={{ display: 'flex' }}
                 initial="hidden"

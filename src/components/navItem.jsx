@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useNavigate } from 'react-router';
 import { NavLink } from 'react-router-dom';
 
 function useInterval(callback, delay) {
@@ -22,20 +21,15 @@ function useInterval(callback, delay) {
 
 const totalLength = 12;
 
-const NavItem = ({ text, path, setNavColor }) => {
-    const navigate = useNavigate();
+const NavItem = ({ text, path, setNavColor, download }) => {
     const [fullText, setFullText] = useState(text);
     const [active, setActive] = useState(path === '');
     const [hovered, setHovered] = useState(false);
 
-    const handlePress = () => {
-        navigate(path);
-    };
-
     const animate = () => {
-        console.log(`Hello from the ${text} animate function`);
-        console.log('hovered', hovered);
-        console.log('active', active);
+        // console.log(`Hello from the ${text} animate function`);
+        // console.log('hovered', hovered);
+        // console.log('active', active);
         if (!hovered && !active && fullText.length === text.length) return;
         if (fullText.length < totalLength && (hovered || active)) { // has to increase
             setFullText((current) => {
@@ -58,6 +52,24 @@ const NavItem = ({ text, path, setNavColor }) => {
         animate();
     }, 100);
 
+    if (download) {
+        return (
+            <a
+                href={path}
+                target="_blank"
+                download={text}
+                rel="noreferrer"
+                onMouseEnter={() => {
+                    console.log('resume hovered');
+                    setHovered(true);
+                }}
+                onMouseLeave={() => setHovered(false)}
+            >
+                {fullText}
+            </a>
+        );
+    }
+
     return (
         <NavLink
             onMouseEnter={() => setHovered(true)}
@@ -67,7 +79,6 @@ const NavItem = ({ text, path, setNavColor }) => {
                 setActive(isActive);
                 if (isActive) setNavColor();
             }}
-            activeClassName="active"
         >
             {fullText}
         </NavLink>

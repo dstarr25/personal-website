@@ -12,9 +12,12 @@ html {
     padding: 0;
     box-sizing: border-box;
 }
+::-webkit-scrollbar {
+    display: none;
+}
 
 body {
-    overflow: hidden;
+
 }
 
 #main {
@@ -69,7 +72,7 @@ body {
 
     .homePage, .aboutPage, .projectsPage {
         width: 100%;
-        height: 100%;
+        min-height: 100%;
         position: absolute;
     }
 
@@ -89,20 +92,66 @@ body {
     }
 
     .projectsPage {
-        background-color: rgb(240, 240, 240);
+        background-color: hsl(0deg, 0%, 95%);
+        font-family: 'Montserrat', sans-serif;
+
+        .project {
+            background-color: rgb(220, 220, 220);
+            min-height: 85vh;
+            color: black;
+            padding: 5vw;
+
+            .titles {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                    font-weight: 500;
+                .title {
+                    font-size: 40px;
+                }
+                .rightInfo {
+                    font-size: 50%;
+                }
+                .subtitle {
+                    font-weight: 300;
+                }
+            }
+
+            .rightInfo {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-end;
+            }
+
+        }
     }
 
     .aboutPage, .projectsPage {
         .titleText {
-            border: 1px solid black;
+            border-bottom: 1px solid black;
             color: black;
-            font-size: 50px;
+            font-size: 60px;
             font-weight: bold;
-            display: flex;
-            justify-content: space-around;
-            height: 300px;
-            align-items: flex-end;
+            // display: flex;
+            // justify-content: flex-start;
+            // align-items: flex-end;
+            height: 40vh;
+            position: relative;
+            span {
+                position: absolute;
+                bottom: 2.5vw;
+                left: 5vw;
+                font-weight: 700;
+            }
         }
+    }
+
+    .scrollArrow {
+        position: fixed;
+        bottom: 0;
+        color: black;
     }
 
     .box {
