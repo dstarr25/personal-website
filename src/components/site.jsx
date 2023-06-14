@@ -5,64 +5,19 @@ import {
 import { motion } from 'framer-motion';
 import Counter from './counter';
 import Controls from './controls';
-
-function randomInt(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-}
+import Home from './home';
 
 function Site() {
-    const child = () => ({
-        visible: {
-            opacity: 1,
-            x: 0,
-            y: 0,
-            transition: {
-                type: 'spring',
-                damping: 12,
-                stiffness: 100,
-            },
-        },
-        hidden: {
-            opacity: 0,
-            x: randomInt(-200, 200),
-            y: randomInt(-200, 200),
-            transition: {
-                type: 'spring',
-                damping: 12,
-                stiffness: 100,
-            },
-        },
-    });
-
-    const greeting = 'Hello. My name is Devon.';
     return (
         <div className="site">
-            {/* <BrowserRouter>
-
-                <NavBar />
+            <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<Welcome />} />
+                    <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/test/:id" element={<Test />} />
                     <Route path="*" element={<FallBack />} />
                 </Routes>
-            </BrowserRouter> */}
-            <p>
-                <motion.div
-                    style={{ display: 'flex' }}
-                    initial="hidden"
-                    animate="visible"
-                    transition={{ staggerChildren: 0.1, delayChildren: 0.5 }}
-                >
-                    {Array.from(greeting).map((letter, index) => (
-                        <motion.span variants={child()} key={letter}>
-                            {letter === ' ' ? '\u00A0' : letter}
-                        </motion.span>
-                    ))}
-                </motion.div>
-            </p>
-
-            <p style={{ fontStyle: 'italic', color: 'lightgray', fontSize: '70%' }}>check back later ;)</p>
+            </BrowserRouter>
         </div>
     );
 }

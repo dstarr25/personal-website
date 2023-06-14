@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const speed = { x: 3, y: 3 };
-const maxHits = 3;
+const maxHits = 1;
 const colorDiff = 30;
 
 const getRandomNumber = (maxNum) => {

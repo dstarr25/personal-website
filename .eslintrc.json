@@ -35,7 +35,8 @@
         "react/jsx-indent": [2,4],
         "react/jsx-indent-props": [2,4],
         "object-curly-newline": 0,
-        "quote-props": 0
+        "quote-props": 0,
+        "react/jsx-no-constructed-context-values": 0
     },
     "plugins": [
         "react"
