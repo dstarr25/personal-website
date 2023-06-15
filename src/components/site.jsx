@@ -38,15 +38,15 @@ const AnimatedRoutes = () => {
 };
 
 const navProps = [
-    { text: 'home', path: '', activeColor: '#eeeeee' },
-    { text: 'about', path: 'about', activeColor: '#000000' },
+    { text: 'home', path: '', activeColor: '#ffffff' },
+    { text: 'about', path: 'about', activeColor: '#F07F75' },
     { text: 'projects', path: 'projects', activeColor: '#111111' },
 ];
 
 const Nav = (props) => {
     const [navColor, setNavColor] = useState(navProps[0].activeColor);
     return (
-        <nav id="navBar" style={{ color: navColor }}>
+        <motion.nav id="navBar" animate={{ color: navColor }} transition={{ duration: 1 }}>
             {navProps.map((item) => (
                 <NavItem setNavColor={() => setNavColor(item.activeColor)} text={item.text} path={item.path} key={item.text} />
             ))}
@@ -56,7 +56,7 @@ const Nav = (props) => {
             <NavItem text="about" path="about" />
             <NavItem text="projects" path="projects" /> */}
 
-        </nav>
+        </motion.nav>
     );
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const gray = 'hsl(0deg, 0%, 80%)';
+const gray = 'hsl(0deg, 0%, 95%)';
 const white = 'hsl(0deg, 0%, 95%)';
 
 const Project = ({ project, index, p2ref }) => {
@@ -13,9 +13,13 @@ const Project = ({ project, index, p2ref }) => {
                     <div className="subtitle">{project.subtitle}</div>
                 </div>
             </div>
-            {/* <div>
-
-            </div> */}
+            <div className="projectInfo">
+                <img src={project.image} alt="" />
+                <div className="text">
+                    <div>{project.description}</div>
+                    <div><span>Technologies used:</span>{`\u00A0${project.technologies}`}</div>
+                </div>
+            </div>
 
         </div>
     );

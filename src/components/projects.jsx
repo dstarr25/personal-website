@@ -7,7 +7,7 @@ import Project from './project';
 function Projects() {
     // const { scrollYProgress } = useScroll();
     const bottomRef = useRef(null);
-    const bottomInView = useInView(bottomRef);
+    const bottomInView = useInView(bottomRef, { once: true });
     const animate = useAnimation();
 
     const startScrollAnim = async () => {
@@ -70,7 +70,7 @@ function Projects() {
 
             <motion.div
                 className="scrollArrow"
-                initial={{ x: '-50%' }}
+                // initial={{ x: '-50%' }}
                 // animate={{ opacity: bottomInView ? 0 : 1 }}
                 animate={animate}
                 // transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
