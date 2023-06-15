@@ -21,7 +21,7 @@ function useInterval(callback, delay) {
 
 const totalLength = 12;
 
-const NavItem = ({ text, path, setNavColor, download }) => {
+const NavItem = ({ text, path, setNavColor, resume }) => {
     const [fullText, setFullText] = useState(text);
     const [active, setActive] = useState(path === '');
     const [hovered, setHovered] = useState(false);
@@ -52,12 +52,11 @@ const NavItem = ({ text, path, setNavColor, download }) => {
         animate();
     }, 100);
 
-    if (download) {
+    if (resume) {
         return (
             <a
                 href={path}
                 target="_blank"
-                download={text}
                 rel="noreferrer"
                 onMouseEnter={() => {
                     console.log('resume hovered');

@@ -50,12 +50,7 @@ const Nav = (props) => {
             {navProps.map((item) => (
                 <NavItem setNavColor={() => setNavColor(item.activeColor)} text={item.text} path={item.path} key={item.text} />
             ))}
-            <NavItem text="resume" download path={resume} />
-
-            {/* <NavItem text="home" path="" />
-            <NavItem text="about" path="about" />
-            <NavItem text="projects" path="projects" /> */}
-
+            <NavItem text="resume" resume path={resume} />
         </motion.nav>
     );
 };
