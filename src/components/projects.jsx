@@ -45,39 +45,34 @@ function Projects() {
             animate={{ top: '0vh' }}
             exit={{ top: '-100vh' }}
             transition={{ duration: 1, ease: 'easeInOut' }}
-            // onClick={() => console.log('scrollYProgress:', scrollYProgress.current)}
-
         >
-            <div className="titleText">
-                <motion.span
-                    initial="hide"
-                    whileInView="show"
-                    variants={animVariants.titleVariants}
-                    transition={{ delay: 0.5, type: 'spring', damping: 12, stiffness: 300 }}
-                    viewport={{ once: true }}
-                >
-                    Projects
-                </motion.span>
-            </div>
-            {projects.map((project, index) => (
-                <Project
-                    project={project}
-                    index={index}
-                    p2ref={index === 1 ? bottomRef : null}
-                />
-            ))}
-            {/* <div style={{ height: 10 }} ref={bottomRef} /> */}
+            <div className="smallerThanFull">
+                <div className="titleText">
+                    <motion.span>
+                        Projects
+                    </motion.span>
+                </div>
+                {projects.map((project, index) => (
+                    <Project
+                        project={project}
+                        index={index}
+                        p2ref={index === 1 ? bottomRef : null}
+                    />
+                ))}
+                {/* <div style={{ height: 10 }} ref={bottomRef} /> */}
 
-            <motion.div
-                className="scrollArrow"
-                // initial={{ x: '-50%' }}
-                // animate={{ opacity: bottomInView ? 0 : 1 }}
-                animate={animate}
+                <motion.div
+                    className="scrollArrow"
+                    // initial={{ x: '-50%' }}
+                    // animate={{ opacity: bottomInView ? 0 : 1 }}
+                    animate={animate}
                 // transition={{ duration: 0.5, repeat: Infinity, repeatType: 'reverse', ease: 'easeInOut' }}
-            >
-                <span>see more</span>
-                <LuChevronDown />
-            </motion.div>
+                >
+                    <span>see more</span>
+                    <LuChevronDown />
+                </motion.div>
+
+            </div>
 
         </motion.div>
     );

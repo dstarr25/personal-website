@@ -30,6 +30,11 @@ body {
     color: white;
 }
 
+.logoHolder {
+    background-color: black;
+    height: 100vh;
+}
+
 .overlay {
     width: 100%;
     height: 100vh;
@@ -80,7 +85,7 @@ body {
         width: 85%;
 
         .project {
-            background-color: rgb(220, 220, 220);
+            background-color: hsl(0deg, 0%, 95%);
             min-height: 85vh;
             color: black;
             padding: 5vw;
@@ -116,11 +121,16 @@ body {
 
             .projectInfo {
                 display: flex;
-                flex-direction: row;
+                // flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
                 >* {
                     width: 48%;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
                 }
                 .text {
                     font-size: 20px;
@@ -138,6 +148,38 @@ body {
                         font-weight: 500;
                     }
                 }
+            }
+
+            .links {
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 20px;
+                .link {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 20px;
+                    font-weight: 300;
+                    border: 1px solid black;
+                    padding: 10px;
+                    border-radius: 10px;
+                    transition: transform 0.3s linear;
+                    span {
+                        transition: transform 0.3s linear;
+                    }
+                    &:hover {
+                        transform: scale(1.2);
+                        span {
+                            transform: scale(0.8333);
+                        }
+                    }
+
+                }
+
             }
 
         }
@@ -186,7 +228,7 @@ body {
         right: 30px;
         display: flex;
         flex-direction: column;
-        height: 100%;
+        // height: 100%;
         justify-content: flex-start;
         align-items: flex-end;
         color: white;

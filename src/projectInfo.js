@@ -38,7 +38,11 @@ export const projects = [
 
 ];
 
-const titleVariants = {
+const stiffness = 400;
+const damping = 20;
+const delay = 0.2;
+
+const fadeAndSlideInFromLeft = {
     hide: {
         opacity: 0,
         x: -50,
@@ -46,9 +50,27 @@ const titleVariants = {
     show: {
         opacity: 1,
         x: 0,
+        transition: { delay, type: 'spring', damping, stiffness },
+
     },
 };
 
+const fadeAndSlideInFromRight = { ...fadeAndSlideInFromLeft, hide: { ...fadeAndSlideInFromLeft.hide, x: 50 } };
+
+const fadeAndSlideInFromTop = {
+    hide: {
+        opacity: 0,
+        y: -50,
+    },
+    show: {
+        opacity: 1,
+        y: 0,
+        transition: { delay, type: 'spring', damping, stiffness },
+    },
+};
+
+const fadeAndSlideInFromBottom = { ...fadeAndSlideInFromTop, hide: { ...fadeAndSlideInFromTop.hide, y: 50 } };
+
 export const animVariants = {
-    titleVariants,
+    fadeAndSlideInFromLeft, fadeAndSlideInFromRight, fadeAndSlideInFromTop, fadeAndSlideInFromBottom,
 };
