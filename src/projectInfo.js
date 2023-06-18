@@ -40,7 +40,7 @@ export const projects = [
 
 const stiffness = 400;
 const damping = 20;
-const delay = 0.2;
+const delay = 0.4;
 
 const fadeAndSlideInFromLeft = {
     hide: {
