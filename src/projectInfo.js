@@ -37,7 +37,7 @@ export const projects = [
                 link: 'https://store.steampowered.com/app/2102810/Cookie_Clicker_but_You_Type',
             },
             {
-                text: 'Contact For Repos',
+                text: 'Contact For Repo',
                 link: 'mailto:devonstarr123@gmail.com',
             },
         ],
