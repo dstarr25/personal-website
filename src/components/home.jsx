@@ -60,7 +60,7 @@ function Home() {
             </motion.div>
 
             <motion.div
-                style={{ display: 'flex', flexDirection: 'row' }}
+                className="iconRow"
                 initial={{ opacity: 0, y: 100, gap: '100px' }}
                 animate={{ opacity: 1, y: 0, gap: '30px' }}
                 transition={{ delay: 3.5, type: 'spring', damping: 12, stiffness: 100 }}
