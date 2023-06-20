@@ -66,6 +66,7 @@ body {
 
 
     .homePage {
+        color: white;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -246,17 +247,29 @@ body {
             display: flex;
             justify-content: flex-end;
             align-items: flex-end;
+            img {
+                border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            }
         }
 
         .skills {
             padding: 0 0 0 5vw;
-
+            .tooltip {
+                position: absolute;
+                color: #F07F75;
+            }
             .skillIcons {
                 display: flex;
                 justify-content: center;
                 gap: 20px;
                 flex-wrap: wrap;
+
             }
+        }
+        .smallerThanFull, .skills {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
         }
     }
 

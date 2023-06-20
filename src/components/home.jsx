@@ -65,9 +65,9 @@ function Home() {
                 animate={{ opacity: 1, y: 0, gap: '30px' }}
                 transition={{ delay: 3.5, type: 'spring', damping: 12, stiffness: 100 }}
             >
-                <Icon icon={<LuGithub />} size={iconSize} hoverColor="#E78793" link="https://github.com/dstarr25" />
-                <Icon icon={<LuMail />} size={iconSize} hoverColor="#FFE793" link="mailto:devonstarr123@gmail.com" />
-                <Icon icon={<LuLinkedin />} size={iconSize} hoverColor="#94DBFF" link="https://www.linkedin.com/in/devon-starr/" />
+                <Icon icon={<LuGithub />} size={iconSize} hoverColor="#E78793" link="https://github.com/dstarr25" initialColor="#ffffff" />
+                <Icon icon={<LuMail />} size={iconSize} hoverColor="#FFE793" link="mailto:devonstarr123@gmail.com" initialColor="#ffffff" />
+                <Icon icon={<LuLinkedin />} size={iconSize} hoverColor="#94DBFF" link="https://www.linkedin.com/in/devon-starr/" initialColor="#ffffff" />
             </motion.div>
         </motion.div>
     );

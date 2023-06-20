@@ -183,6 +183,20 @@ const fadeAndSlideInFromTop = {
 
 const fadeAndSlideInFromBottom = { ...fadeAndSlideInFromTop, hide: { ...fadeAndSlideInFromTop.hide, y: 50 } };
 
+const eggSpin = {
+    hide: {
+        scale: 0,
+        rotate: -360,
+    },
+    show: {
+        scale: 1,
+        rotate: 0,
+        transition: {
+            type: 'spring', damping: 15, stiffness: 100,
+        },
+    },
+};
+
 export const animVariants = {
-    fadeAndSlideInFromLeft, fadeAndSlideInFromRight, fadeAndSlideInFromTop, fadeAndSlideInFromBottom,
+    fadeAndSlideInFromLeft, fadeAndSlideInFromRight, fadeAndSlideInFromTop, fadeAndSlideInFromBottom, eggSpin,
 };

@@ -3,11 +3,11 @@ import { IconContext } from 'react-icons';
 import { motion, useAnimation } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
-const Icon = ({ icon, size, hoverColor, link, setHoveredIcon, name }) => {
+const Icon = ({ icon, size, hoverColor, link, handleHover, name, initialColor }) => {
     const controls = useAnimation();
 
     const handleHoverStart = async () => {
-        setHoveredIcon(name);
+        if (handleHover) handleHover(name);
         controls.start({
             scale: 1.2,
             transition: { type: 'spring', stiffness: 400, damping: 12 },
@@ -24,7 +24,7 @@ const Icon = ({ icon, size, hoverColor, link, setHoveredIcon, name }) => {
             transition: { type: 'spring', stiffness: 400, damping: 12 },
         });
         controls.start({
-            color: '#ffffff',
+            color: initialColor,
             transition: { duration: 0.3 },
         });
     };
@@ -35,7 +35,7 @@ const Icon = ({ icon, size, hoverColor, link, setHoveredIcon, name }) => {
         >
             <Link to={link}>
                 <motion.div
-                    initial={{ color: '#ffffff' }}
+                    initial={{ color: initialColor }}
                     animate={controls}
                     onMouseEnter={handleHoverStart}
                     onMouseLeave={handleHoverEnd}
