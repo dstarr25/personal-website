@@ -192,7 +192,7 @@ const eggSpin = {
         scale: 1,
         rotate: 0,
         transition: {
-            type: 'spring', damping: 15, stiffness: 100,
+            type: 'spring', damping: 15, stiffness: 100, delay: 0.5,
         },
     },
 };

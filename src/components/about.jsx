@@ -81,8 +81,8 @@ function About() {
                     </div>
                     <div className="skillIcons">
                         <Icon icon={<TbBrandRedux />} handleHover={handleHover} name="redux" size={skillSize} hoverColor="#764abc" initialColor={iconColor} />
-                        <Icon icon={<TbBrandHtml5 />} handleHover={handleHover} name="html" size={skillSize} hoverColor="#764abc" initialColor={iconColor} />
-                        <Icon icon={<TbBrandCss3 />} handleHover={handleHover} name="css" size={skillSize} hoverColor="#764abc" initialColor={iconColor} />
+                        <Icon icon={<TbBrandHtml5 />} handleHover={handleHover} name="html" size={skillSize} hoverColor="#DD4B24" initialColor={iconColor} />
+                        <Icon icon={<TbBrandCss3 />} handleHover={handleHover} name="css" size={skillSize} hoverColor="#0068BA" initialColor={iconColor} />
                         <Icon icon={<TbBrandReactNative />} handleHover={handleHover} name="react & react native" size={skillSize} hoverColor="#5ED3F3" initialColor={iconColor} />
                         <Icon icon={<TbBrandUnity />} handleHover={handleHover} name="unity" size={skillSize} hoverColor="#000000" initialColor={iconColor} />
                         <Icon icon={<TbBrandCSharp />} handleHover={handleHover} name="c#" size={skillSize} hoverColor="#764abc" initialColor={iconColor} />
