@@ -7,9 +7,9 @@ import memoryscapeImg from '../img/memoryscape.png';
 // import ccbytImg from '../img/ccbyt.gif';
 // import colorsudokuImg from '../img/colorsudoku.gif';
 // import diceartImg from '../img/diceArt.gif';
-// import veridiumImg from '../img/veridium.jpg';
-// import dalimuseumImg from '../img/dalimuseum.png';
-// import intrepidImg from '../img/intrepid.png';
+import veridiumImg from '../img/veridium.jpg';
+import dalimuseumImg from '../img/dalimuseum.png';
+import intrepidImg from '../img/intrepid.png';
 // import reactnotesImg from '../img/reactNotes.gif';
 
 const PTypes = {
@@ -41,7 +41,7 @@ const projects = [
         subtitle: 'COSC 52 - Full Stack Web Development',
         type: PTypes.WEB,
         description: 'A mobile app that encourages users to get outside their comfort zones and try new things. Users can attempt challenges to earn points, and also create challenges that they would like to see others try. I worked with 5 other members to build out the app in a few weeks. The application is built using React Native and Expo, with an Express.js and MongoDB backend.',
-        image: 'https://s12.gifyu.com/images/SQlFH.png',
+        image: intrepidImg,
         links: [
             {
                 text: 'Contact For Repo',
@@ -74,7 +74,7 @@ const projects = [
         subtitle: 'DALI Lab, Dartmouth College',
         type: PTypes.UNITY,
         description: 'An exhibit built in collaboration with the Dali Museum in St. Petersburg, Florida. The exhibit is a desktop application that tracks users\' eyes as they explore the works of Salvador Dali, and informs them of their eye tracking data - the path their eyes took while inspecting the painting, spots they spent the most time looking at, etc. The exhibit is built using Unity and C#, along with Tobii Pro Nano eye trackers',
-        image: 'https://s12.gifyu.com/images/SQlFK.png',
+        image: dalimuseumImg,
         links: [
             {
                 text: 'Contact For Repo',
@@ -126,7 +126,7 @@ const projects = [
         subtitle: 'DALI Lab, Dartmouth College',
         type: PTypes.UNITY,
         description: 'A VR application that visualizes atomic crystal structures in 3D. Users can view, manipulate, and expand structures to better understand their properties. There are also lectures for certain elements that the app walks users through to help them wrap their head around these structures. The project is in collaboration with the chemistry department at Dartmouth College, and has been used in the classroom to teach students how certain elements are structured in solid-state chemistry.',
-        image: 'https://s11.gifyu.com/images/SQlFN.jpg',
+        image: veridiumImg,
         links: [
             {
                 text: 'Contact For Repo',
