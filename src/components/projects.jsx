@@ -3,7 +3,7 @@ import { motion, useScroll, useInView, useAnimation } from 'framer-motion';
 import { LuChevronDown } from 'react-icons/lu';
 import Project from './project';
 
-// import memoryscapeImg from '../img/memoryscape.png';
+import memoryscapeImg from '../img/memoryscape.png';
 // import ccbytImg from '../img/ccbyt.gif';
 // import colorsudokuImg from '../img/colorsudoku.gif';
 // import diceartImg from '../img/diceArt.gif';
@@ -25,7 +25,7 @@ const projects = [
         subtitle: 'DALI Lab, Dartmouth College',
         type: PTypes.UNITY,
         description: 'MemoryScape is a VR application that allows users to look back at past times in their lives and relive their memories using Spotify and Google Photos. Users first sign into their Spotify and Google Photos accounts and then enter VR to view a procedurally generated room with pictures from the time frame they would like to view, and songs from that time frame playing in the background. The project uses an Express.js backend to send users a frontend webpage that allows them to login to their accounts, and uses Firebase to store authentication for Google Photos and Spotify which is then grabbed in the VR app to display the user\'s memories.',
-        image: 'https://s11.gifyu.com/images/SQlFT.png',
+        image: memoryscapeImg,
         links: [
             {
                 text: 'Contact For Repos',
