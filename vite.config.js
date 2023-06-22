@@ -1,5 +1,5 @@
 import eslint from 'vite-plugin-eslint';
-import vitePluginFaviconsInject from 'vite-plugin-favicons-inject';
+// import vitePluginFaviconsInject from 'vite-plugin-favicons-inject';
 
 /* eslint-disable import/no-extraneous-dependencies */
 import { defineConfig } from 'vite';

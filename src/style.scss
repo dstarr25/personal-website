@@ -71,8 +71,9 @@ body {
         flex-direction: column;
         justify-content: center;
         align-items:center;
-        gap: 100px;
+        gap: 15vh;
         background-color: rgb(21, 21, 21);
+
         .iconRow {
             display: flex;
         }
@@ -90,7 +91,7 @@ body {
         .titleText {
             color: black;
             font-size: 80px;
-            height: 40vh;
+            height: 300px;
             position: relative;
     
             span {
@@ -300,8 +301,8 @@ body {
     #navBar {
         position: fixed;
         z-index: 999;
-        top: 30px;
-        right: 30px;
+        top: 2vw;
+        right: 2vw;
         display: flex;
         flex-direction: column;
         // height: 100%;
@@ -311,7 +312,20 @@ body {
         list-style-type: none;
         gap: 20px;
         font-family: 'Source Code Pro', monospace;
-        font-size: 24px;
+        font-size: 1.5vw;
         user-select: none;
+    }
+}
+
+
+@media only screen and (max-width: 900px) {
+    .homePage {
+        font-size: 30px;
+    }
+
+    .project {
+        .titles {
+            flex-direction: column;
+        }
     }
 }
