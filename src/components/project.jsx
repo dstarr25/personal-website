@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import ViewDiv from './viewDiv';
-import { animVariants } from '../projectInfo';
+import animVariants from '../animInfo';
 
 const gray = 'hsl(0deg, 0%, 95%)';
 const white = 'hsl(0deg, 0%, 95%)';

@@ -4,7 +4,7 @@ import { TbBrandCSharp, TbBrandCpp, TbBrandCss3, TbBrandFirebase, TbBrandGit, Tb
 import { FaJava } from 'react-icons/fa';
 import Icon from './icon';
 import ViewDiv from './viewDiv';
-import { animVariants } from '../projectInfo';
+import animVariants from '../animInfo';
 
 const icons = [
     'redux',
