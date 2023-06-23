@@ -4,6 +4,8 @@ const speed = { x: 3, y: 3 };
 const maxHits = 1;
 const colorDiff = 30;
 
+const aspectRatio = 271.3 / 170.3;
+
 const getRandomNumber = (maxNum) => {
     return Math.floor(Math.random() * maxNum);
 };
@@ -120,7 +122,7 @@ const Logo = (props) => {
             const newSpeedMag = Math.sqrt(newSpeed.x ** 2 + newSpeed.y ** 2);
             const angle = (Math.acos(dotProduct / (normalMag * newSpeedMag)) * 180) / Math.PI;
             console.log('angle', angle);
-            if (angle < 35 || angle > 55) return false;
+            if (angle < 25 || angle > 65) return false;
 
             setPos((p) => ({ ...currPos, xSpeed: newSpeed.x, ySpeed: newSpeed.y }));
             setHits(-1);
@@ -208,18 +210,18 @@ const Logo = (props) => {
     // if (hits < 0) return null;
     return (
         <div className="logoHolder">
-            <div className="logo" style={{ top: pos.y, left: pos.x, zIndex: 999, width: 271.3 }} ref={logoref}>
+            <div className="logo" style={{ top: pos.y, left: pos.x, zIndex: 999 }} ref={logoref}>
                 <svg version="1.0"
                     xmlns="http://www.w3.org/2000/svg"
-                    // width="300.000000pt"
-                    // height="188.000000pt"
-                    viewBox="0 0 271.3 170.3"
+                    width="180.9pt"
+                    height="113.5pt"
+                    viewBox="0 0 180.9 113.5"
                     preserveAspectRatio="xMidYMid meet"
                 >
                     <metadata>
                         Created by potrace 1.10, written by Peter Selinger 2001-2011
                     </metadata>
-                    <g transform="translate(-11.000000,180.000000) scale(0.100000,-0.100000)"
+                    <g transform="translate(-11.000000,120) scale(0.0666,-0.0666)"
                         fill={fillColor}
                         stroke="none"
                     >

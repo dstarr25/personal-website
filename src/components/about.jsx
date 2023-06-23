@@ -6,6 +6,29 @@ import Icon from './icon';
 import ViewDiv from './viewDiv';
 import animVariants from '../animInfo';
 
+const getWindowDimensions = () => {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height,
+    };
+};
+
+const useWindowDimensions = () => {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+};
+
 const icons = [
     'redux',
     'html',
@@ -23,13 +46,13 @@ const icons = [
 ];
 
 function About() {
-    const skillSize = '150px';
     const iconColor = '#F07F75';
     const [hoveredIcon, setHoveredIcon] = useState('');
     const [iconNum, setIconNum] = useState(0);
     const controls = useAnimation();
     const viewRef = useRef(null);
     const inView = useInView(viewRef, { once: true });
+    const { height, width } = useWindowDimensions();
 
     const handleHover = (iconName) => {
         setHoveredIcon(iconName);
@@ -40,6 +63,8 @@ function About() {
         if (inView) controls.start('show');
         else controls.start('hide');
     }, [inView]);
+
+    const skillSize = width > 900 ? 100 : 80;
 
     return (
         <motion.div
@@ -66,7 +91,7 @@ function About() {
                 </div>
 
                 <div className="skills">
-                    <div className="title">
+                    <div className="skilledIn">
                         i am skilled in
                         <AnimatePresence>
                             <motion.span

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import ViewDiv from './viewDiv';
 import animVariants from '../animInfo';
@@ -6,10 +6,34 @@ import animVariants from '../animInfo';
 const gray = 'hsl(0deg, 0%, 95%)';
 const white = 'hsl(0deg, 0%, 95%)';
 
+const getWindowDimensions = () => {
+    const { innerWidth: width, innerHeight: height } = window;
+    return {
+        width,
+        height,
+    };
+};
+
+const useWindowDimensions = () => {
+    const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+    useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    return windowDimensions;
+};
+
 const Project = ({ project, index, p2ref }) => {
     const titleRef = useRef(null);
     const controls = useAnimation();
     const titleInView = useInView(titleRef, { once: true });
+    const { height, width } = useWindowDimensions();
 
     useEffect(() => {
         if (titleInView) controls.start('show');
@@ -25,7 +49,7 @@ const Project = ({ project, index, p2ref }) => {
                     <div className="subtitle">{project.subtitle}</div>
                 </div>
             </ViewDiv>
-            <div className="projectInfo" style={{ flexDirection: index % 2 === 0 ? 'row' : 'row-reverse' }}>
+            <div className="projectInfo" style={width > 900 ? { flexDirection: index % 2 === 0 ? 'row' : 'row-reverse' } : { flexDirection: 'column' }}>
                 <ViewDiv controls={controls} variants={animVariants.fadeAndSlideInFromRight}><img src={project.image} alt="" /></ViewDiv>
                 <ViewDiv controls={controls} variants={animVariants.fadeAndSlideInFromLeft} className="text">
                     <div>{project.description}</div>
