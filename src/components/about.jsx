@@ -5,6 +5,7 @@ import { FaJava } from 'react-icons/fa';
 import Icon from './icon';
 import ViewDiv from './viewDiv';
 import animVariants from '../animInfo';
+import aboutMePic from '../img/aboutMePic.jpg';
 
 const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -86,7 +87,7 @@ function About() {
                     </div>
 
                     <ViewDiv controls={controls} variants={animVariants.eggSpin} className="portrait">
-                        <img src="https://media.licdn.com/dms/image/C4E03AQEBXk0s7NKWdw/profile-displayphoto-shrink_800_800/0/1638081523111?e=2147483647&v=beta&t=kyK5APHA6B4HkQd2xFUI2e9NZf6OASmG11GJIyExI58" alt="me" />
+                        <img src={aboutMePic} alt="me" />
                     </ViewDiv>
                 </div>
 

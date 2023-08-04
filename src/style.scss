@@ -249,13 +249,17 @@ body {
             justify-content: flex-end;
             align-items: flex-end;
             img {
-                max-width: 100%;
+                max-width: 70%;
+                // aspect-ratio: 3/4;
+                object-fit: cover;
                 border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
             }
         }
 
         .skills {
             // padding: 0 0 0 5vw;
+            display: flex;
+            margin-bottom: 50px;
 
             .tooltip {
                 position: absolute;
@@ -266,6 +270,8 @@ body {
                 justify-content: center;
                 gap: 20px;
                 flex-wrap: wrap;
+                width: 80%;
+                align-self: center;
 
             }
         }
@@ -368,7 +374,7 @@ body {
                     font-size: 24px;
                 }
                 .portrait {
-                    justify-content: flex-start;
+                    justify-content: center;
                     img {
                         max-width: 50%;
                     }
