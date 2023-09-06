@@ -53,6 +53,7 @@ function About() {
     const controls = useAnimation();
     const viewRef = useRef(null);
     const inView = useInView(viewRef, { once: true });
+    const [imgLoaded, setImgLoaded] = useState(false);
     const { height, width } = useWindowDimensions();
 
     const handleHover = (iconName) => {
@@ -61,9 +62,14 @@ function About() {
     };
 
     useEffect(() => {
-        if (inView) controls.start('show');
-        else controls.start('hide');
-    }, [inView]);
+        if (imgLoaded && inView) {
+            console.log('showing');
+            controls.start('show');
+        } else {
+            console.log('hiding');
+            controls.start('hide');
+        }
+    }, [inView, imgLoaded]);
 
     const skillSize = width > 900 ? 100 : 80;
 
@@ -80,15 +86,15 @@ function About() {
                 <div className="top">
                     <div className="infoText">
                         <div ref={viewRef} className="title">about me</div>
-                        <div className="text">Software Engineer with experience in Unity/VR and Full-Stack Web Development</div>
+                        <div className="text">Software Engineer with experience in Unity/VR, mobile app, and full-stack web development</div>
                         <div className="description">
-                            I am currently a rising Junior at Dartmouth College, pursuing a major in Computer Science and a minor in Digital Arts. I am pursuing a career in software engineering and am currently searching for full-time internships.
+                            I am currently a rising Junior at Dartmouth College, studying Computer Science and a minor in Digital Arts. I am pursuing a career in software engineering and am currently searching for full-time internships.
                         </div>
                     </div>
 
-                    <ViewDiv controls={controls} variants={animVariants.eggSpin} className="portrait">
-                        <img src={aboutMePic} alt="me" />
-                    </ViewDiv>
+                    <motion.div animate={controls} initial="hide" variants={animVariants.eggSpin} className="portrait">
+                        <img src={aboutMePic} alt="me" onLoad={() => { setImgLoaded(true); console.log('loaded'); }} />
+                    </motion.div>
                 </div>
 
                 <div className="skills">
