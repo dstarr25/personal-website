@@ -1,11 +1,14 @@
-import memoryscapeImg from './img/memoryscape.png';
-// import ccbytImg from './img/ccbyt.gif';
-// import colorsudokuImg from './img/colorsudoku.gif';
-// import diceartImg from './img/diceArt.gif';
-import veridiumImg from './img/veridium.jpg';
-import dalimuseumImg from './img/dalimuseum.png';
-import intrepidImg from './img/intrepid.png';
-// import reactnotesImg from './img/reactNotes.gif';
+const memoryscapeImg = '/img/memoryscape.png';
+const veridiumImg = '/img/veridium.jpg';
+const dalimuseumImg = '/img/dalimuseum.png';
+const intrepidImg = '/img/intrepid.png';
+const higherlowerImg = '/img/higherlower.gif';
+const ccbytImg = '/img/ccbyt.gif';
+const colorsudokuImg = '/img/colorSudoku.gif';
+const diceartImg = '/img/diceArt.gif';
+const reactnotesImg = '/img/reactNotes.gif';
+const whattheyapImg = '/img/whattheyap.png';
+const dpictionImg = '/img/dpiction.png';
 
 const PTypes = {
     UNITY: 'unity',
@@ -14,6 +17,52 @@ const PTypes = {
 };
 
 export default [
+    {
+        title: 'dPiction',
+        timeFrame: 'Aug 2023 - Mar 2024',
+        subtitle: 'Personal Project',
+        type: PTypes.WEB,
+        description: 'dPiction is essentially a web-based pictionary spinoff. The catch is that it introduces personality into games by allowing the players to create the prompts for drawing. This makes the games more relatable and silly for groups of friends. It is fully functional and can handle many ongoing games simultaneously hosting many players from anywhere in the world.',
+        image: dpictionImg,
+        links: [
+            {
+                text: 'FE Repo',
+                link: 'https://github.com/dstarr25/dpiction',
+            },
+            {
+                text: 'BE Repo',
+                link: 'https://github.com/dstarr25/dPictionBackend',
+            },
+            {
+                text: 'Try it here!',
+                link: 'https://dpiction.onrender.com',
+            },
+        ],
+        technologies: 'Bun.js, Vue.js, WebSockets, TailwindCSS, TypeScript, Docker',
+    },
+    {
+        title: 'What The Yap?',
+        timeFrame: 'Apr 2024',
+        subtitle: 'HackDartmouth IX',
+        type: PTypes.WEB,
+        description: 'What The Yap? is an innovative study tool designed to enhance learning by integrating AI technology with traditional oral repetition methods. Users can upload documents and class notes to instantly generate practice questions, which can be engaged with through voice commands. This allows users to study effectively while performing other tasks, making it ideal for auditory learners, individuals with visual impairments, or anyone looking to maximize their time. Two other developers and I built this project in les than 24 hours at HackDartmouth IX, and it won first place!',
+        image: whattheyapImg,
+        links: [
+            {
+                text: 'Contact For Repos',
+                link: 'mailto:devonstarr123@gmail.com',
+            },
+            {
+                text: 'Try it here!',
+                link: 'https://whattheyap.study',
+            },
+            {
+                text: 'Hackathon Site',
+                link: 'https://devpost.com/software/yabber',
+            },
+        ],
+        technologies: 'React, TailwindCSS, Azure Speech SDK, Firebase, Zustand, ChatGPT, Express.js',
+    },
     {
         title: 'MemoryScape',
         timeFrame: 'Mar 2023 - May 2023',
@@ -35,7 +84,7 @@ export default [
         subtitle: 'COSC 61 - Database Systems',
         type: PTypes.WEB,
         description: 'This project involves the creation of a MySQL database from a large dataset of movies found online kaggle.com. We created a structure that could efficiently store our movies data, and implemented this structure using the initial data. Ultimately we have used the database to create a web game that incorporates several metrics about the movies and has the user guess which movie has a higher or lower metric.',
-        image: 'https://github.com/john-davanzo/cs61_final_project_john_devon/raw/main/milestone_4/img/gameplay.gif',
+        image: higherlowerImg,
         links: [
             {
                 text: 'Contact For Repo',
@@ -65,7 +114,7 @@ export default [
         subtitle: 'Personal Project, Steam Game',
         type: PTypes.UNITY,
         description: 'An incremental strategy-based typing game developed in Unity. Type words to earn keys, a currency which can be used to buy upgrades to earn keys faster. This addicting nature of progression helps hundreds of typists in many different countries enjoy honing their skills. I released it on Steam in Sept 2022 and made one small update to it, adding MacOS and Linux support as well as some post-release bug fixes.',
-        image: 'https://s11.gifyu.com/images/SQlF3.gif',
+        image: ccbytImg,
         links: [{
             text: 'Steam Page',
             link: 'https://store.steampowered.com/app/2102810/Cookie_Clicker_but_You_Type',
@@ -98,7 +147,7 @@ export default [
         subtitle: 'Personal Project',
         type: PTypes.WEB,
         description: 'A color-based sudoku game built using React. The game is built using React and JavaScript in combination with sudoku solving algorithms and events, and is hosted on render. The game is fully playable - allowing users to generate a sudoku board with only one solution, check whether they are on the right track, and solve the board automatically if they wish. The game is also responsive, and can be played on mobile devices as touch is the only input required to play.',
-        image: 'https://s12.gifyu.com/images/SQlFx.gif',
+        image: colorsudokuImg,
         links: [
             {
                 text: 'Try it out!',
@@ -117,7 +166,7 @@ export default [
         subtitle: 'Personal Project',
         type: PTypes.WEB,
         description: 'A web app that generates beautiful mosaics using dice. Users can upload an image, and the app will generate a mosaic using dice. The app is built using React and JavaScript in combination with image matrix manipulation to generate mosaics, and is hosted on render. Users can specify what size they want their mosaic to be, and whether to use black or white dice.',
-        image: 'https://s11.gifyu.com/images/SQlF9.gif',
+        image: diceartImg,
         links: [{
             text: 'Try it out!',
             link: 'https://dice-art.onrender.com',
@@ -150,7 +199,7 @@ export default [
         subtitle: 'Personal Project',
         type: PTypes.WEB,
         description: 'Web app which uses React components to display notes which can be edited, dragged, and deleted. The app uses firebase to store notes, and allows users to sign in with their Google account to create their own personal page of notes that only they can access. It is hosted on render.',
-        image: 'https://s12.gifyu.com/images/SQlFw.gif',
+        image: reactnotesImg,
         links: [{
             text: 'Try it out!',
             link: 'https://devon-notes.onrender.com/',

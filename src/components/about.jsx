@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence, useAnimation, useInView } from 'framer-motion';
-import { TbBrandCSharp, TbBrandCpp, TbBrandCss3, TbBrandFirebase, TbBrandGit, TbBrandHtml5, TbBrandJavascript, TbBrandMongodb, TbBrandMysql, TbBrandPython, TbBrandReact, TbBrandReactNative, TbBrandRedux, TbBrandTailwind, TbBrandTypescript, TbBrandUnity, TbBrandVue } from 'react-icons/tb';
+import { TbBrandRust, TbBrandGraphql, TbBrandCSharp, TbBrandCpp, TbBrandCss3, TbBrandFirebase, TbBrandGit, TbBrandHtml5, TbBrandJavascript, TbBrandMongodb, TbBrandMysql, TbBrandPython, TbBrandReact, TbBrandReactNative, TbBrandRedux, TbBrandTailwind, TbBrandTypescript, TbBrandUnity, TbBrandVue } from 'react-icons/tb';
 import { FaJava } from 'react-icons/fa';
 import Icon from './icon';
 import ViewDiv from './viewDiv';
 import animVariants from '../animInfo';
-import aboutMePic from '../img/aboutMePic.jpg';
+
+const aboutMePic = '/img/aboutMePic.jpg';
 
 const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -72,7 +73,7 @@ function About() {
                         <div ref={viewRef} className="title">about me</div>
                         <div className="text">Software Engineer with experience in Unity/VR, mobile app, and full-stack web development</div>
                         <div className="description">
-                            I am currently a rising Junior at Dartmouth College, studying Computer Science and a minor in Digital Arts. I am pursuing a career in software engineering and am currently searching for full-time internships.
+                            I am currently a rising Senior at Dartmouth College, studying Computer Science and a minor in Digital Arts. I am pursuing a career in software engineering and am currently searching for full-time positions.
                         </div>
                     </div>
 
@@ -113,9 +114,10 @@ function About() {
                         <Icon icon={<TbBrandMysql />} handleHover={handleHover} name="sql/mysql" size={skillSize} hoverColor="#FFA518" initialColor={iconColor} />
                         <Icon icon={<TbBrandGit />} handleHover={handleHover} name="git" size={skillSize} hoverColor="#E84D31" initialColor={iconColor} />
                         <Icon icon={<FaJava />} handleHover={handleHover} name="java" size={skillSize} hoverColor="#F0931C" initialColor={iconColor} />
+                        <Icon icon={<TbBrandGraphql />} handleHover={handleHover} name="graphql" size={skillSize} hoverColor="#DE33A6" initialColor={iconColor} />
+                        <Icon icon={<TbBrandRust />} handleHover={handleHover} name="rust" size={skillSize} hoverColor="#F75108" initialColor={iconColor} />
                     </div>
                 </div>
-
             </div>
         </motion.div>
     );
