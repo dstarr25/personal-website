@@ -1,3 +1,3 @@
 # Personal Website!
 
-hosted at [devonstarr.me](https://devonstarr.me/)
+hosted at [dstarr.dev](https://dstarr.dev/)
