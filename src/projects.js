@@ -9,6 +9,7 @@ const diceartImg = '/img/diceArt.gif';
 const reactnotesImg = '/img/reactNotes.gif';
 const whattheyapImg = '/img/whattheyap.png';
 const dpictionImg = '/img/dpiction.png';
+const quenchedImg = '/img/quenched.png';
 
 const PTypes = {
     UNITY: 'unity',
@@ -17,6 +18,25 @@ const PTypes = {
 };
 
 export default [
+    {
+        title: 'Quenched',
+        timeFrame: 'Mar 2025 - June 2025',
+        subtitle: 'Personal Project',
+        type: PTypes.UNITY,
+        description: 'Quenched is a pseudo-multiplayer auto-battler. Players go through minigames to build up a team of drinks, and at the end of each day, they fight an opponent team.',
+        image: quenchedImg,
+        links: [
+            {
+                text: 'Demo video!',
+                link: 'https://drive.google.com/file/d/1qqrluEZBhwZt_T6vVCJr3onwFlqDeuua/view',
+            },
+            {
+                text: 'Contact For Repos',
+                link: 'mailto:devonstarr123@gmail.com',
+            },
+        ],
+        technologies: 'Unity2D, C#, .NET, Firebase Firestore & Auth',
+    },
     {
         title: 'dPiction',
         timeFrame: 'Aug 2023 - Mar 2024',
@@ -43,9 +63,9 @@ export default [
     {
         title: 'What The Yap?',
         timeFrame: 'Apr 2024',
-        subtitle: 'HackDartmouth IX',
+        subtitle: 'HackDartmouth IX | First Place',
         type: PTypes.WEB,
-        description: 'What The Yap? is an innovative study tool designed to enhance learning by integrating AI technology with traditional oral repetition methods. Users can upload documents and class notes to instantly generate practice questions, which can be engaged with through voice commands. This allows users to study effectively while performing other tasks, making it ideal for auditory learners, individuals with visual impairments, or anyone looking to maximize their time. Two other developers and I built this project in les than 24 hours at HackDartmouth IX, and it won first place!',
+        description: 'What The Yap? is an innovative study tool designed to enhance learning by integrating AI technology with traditional oral repetition methods. Users can upload documents and class notes to instantly generate practice questions, which can be engaged with through voice commands. This allows users to study effectively while performing other tasks, making it ideal for auditory learners, individuals with visual impairments, or anyone looking to maximize their time. Two other developers and I built this project in less than 24 hours at HackDartmouth IX, and it won first place!',
         image: whattheyapImg,
         links: [
             {

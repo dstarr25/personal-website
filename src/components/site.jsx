@@ -7,9 +7,10 @@ import Counter from './counter';
 import Controls from './controls';
 import Home from './home';
 import NavItem from './navItem';
-import resume from '../resume.pdf';
 import About from './about';
 import Projects from './projects';
+
+const resume = '/Resume_7_29.pdf';
 
 function Site() {
     return (

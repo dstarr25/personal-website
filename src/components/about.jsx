@@ -73,7 +73,9 @@ function About() {
                         <div ref={viewRef} className="title">about me</div>
                         <div className="text">Software Engineer with experience in Unity/VR, mobile app, and full-stack web development</div>
                         <div className="description">
-                            I am currently a rising Senior at Dartmouth College, studying Computer Science and a minor in Digital Arts. I am pursuing a career in software engineering and am currently searching for full-time positions.
+                            I am a recent graduate from Dartmouth College, where I studied Computer Science and Digital Arts.
+                            I am currently a Software Engineer at Walmart Global Tech, developing web features end-to-end
+                            which allow 3rd party sellers on <a href="https://walmart.com">walmart.com</a> to increase their margins.
                         </div>
                     </div>
 
