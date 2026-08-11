@@ -21,9 +21,9 @@ export default [
     {
         title: 'Quenched',
         timeFrame: 'Mar 2025 - June 2025',
-        subtitle: 'Personal Project',
+        subtitle: 'Group Project',
         type: PTypes.UNITY,
-        description: 'Quenched is a pseudo-multiplayer auto-battler. Players go through minigames to build up a team of drinks, and at the end of each day, they fight an opponent team.',
+        description: 'Quenched is a pseudo-multiplayer auto-battler. Players go through minigames to build up a team of drinks and fight real opposing teams other players have built.',
         image: quenchedImg,
         links: [
             {
