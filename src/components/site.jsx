@@ -10,7 +10,7 @@ import NavItem from './navItem';
 import About from './about';
 import Projects from './projects';
 
-const resume = '/Resume_7_29.pdf';
+const resume = '/Resume_8_11.pdf';
 
 function Site() {
     return (
